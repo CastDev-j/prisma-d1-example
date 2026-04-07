@@ -7,18 +7,23 @@
 	"name": "prisma-d1-example",
 	"main": "src/index.ts",
 	"compatibility_date": "2026-04-07",
-	"compatibility_flags": [
-		"nodejs_compat",
-		"global_fetch_strictly_public"
-	],
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"assets": {
 		// The path to the directory containing the `index.html` file to be served at `/`
-		"directory": "./public"
+		"directory": "./public",
 	},
 	"observability": {
-		"enabled": true
+		"enabled": true,
 	},
-	"upload_source_maps": true
+	"upload_source_maps": false,
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "prisma-demo-db",
+			"database_id": "0afa4965-f446-45f6-8a06-1ce39842724d",
+			"remote": true,
+		},
+	],
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
