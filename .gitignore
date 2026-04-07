@@ -167,3 +167,5 @@ dist
 .wrangler/
 
 /src/generated/prisma
+
+migrations/
