@@ -13,3 +13,9 @@ bunx wrangler d1 migrations apply prisma-demo-db --local
 # Remote database
 bunx wrangler d1 migrations apply prisma-demo-db --remotes
 ```
+
+generate the Prisma Client:
+
+```bash
+bunx prisma generate
+```

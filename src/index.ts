@@ -16,7 +16,7 @@ export default {
 		const result = JSON.stringify(users);
 
 		switch (url.pathname) {
-			case '/':
+			case '/api/users':
 				return new Response(result, {
 					headers: {
 						'Content-Type': 'application/json',

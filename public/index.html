@@ -1,32 +1,63 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Hello, World!</title>
-	</head>
-	<body>
-		<h1 id="heading"></h1>
-		<p>This page comes from a static asset stored at `public/index.html` as configured in `wrangler.jsonc`.</p>
-		<button id="button" type="button">Fetch a random UUID</button>
-		<output id="random" for="button"></output>
-		<script>
-			fetch('/message')
-				.then((resp) => resp.text())
-				.then((text) => {
-					const h1 = document.getElementById('heading');
-					h1.textContent = text;
-				});
 
-			const button = document.getElementById("button");
-			button.addEventListener("click", () => {
-				fetch('/random')
-					.then((resp) => resp.text())
-					.then((text) => {
-						const random = document.getElementById('random');
-						random.textContent = text;
-					});
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Hello, World!</title>
+
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 20px;
+		}
+
+		h1 {
+			color: #333;
+		}
+
+		.user-list {
+			list-style-type: none;
+			padding: 0;
+		}
+
+		.user-list li {
+			background-color: #f9f9f9;
+			margin: 5px 0;
+			padding: 10px;
+			border-radius: 4px;
+			border: 1px solid #ddd;
+		}
+
+		.user-list.loading::before {
+			content: 'Cargando usuarios...';
+			display: block;
+			font-style: italic;
+			color: #888;
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Lista de usuarios</h1>
+	<ul class="user-list loading"></ul>
+
+	<script>
+		fetch('/api/users')
+			.then((resp) => resp.json())
+			.then((users) => {
+				const userList = document.querySelector('.user-list');
+				let userCollection = document.createDocumentFragment();
+				users.forEach((user) => {
+					const li = document.createElement('li');
+					li.textContent = `${user.name} (${user.email})`;
+					userCollection.appendChild(li);
+				});
+				userList.appendChild(userCollection);
+				userList.classList.remove('loading');
 			});
-		</script>
-	</body>
+	</script>
+</body>
+
 </html>
